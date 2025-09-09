@@ -29,17 +29,19 @@ A powerful task management application built with Next.js, featuring role-based 
 3. Set up environment variables:
    Create a `.env.local` file in the root directory and add the following variables:
 
-   ```
-   # Clerk
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-   CLERK_SECRET_KEY=your_clerk_secret_key
+   ```env
+   # Clerk Authentication
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_actual_clerk_publishable_key
+   CLERK_SECRET_KEY=your_actual_clerk_secret_key
 
-   # Neon Database
-   DATABASE_URL=your_neon_database_url
+   # Database (PostgreSQL)
+   DATABASE_URL=your_actual_neon_database_url
 
-   # Webhook Secret (for Clerk)
-   WEBHOOK_SECRET=your_webhook_secret
+   # Webhook Secret (from Clerk Dashboard)
+   WEBHOOK_SECRET=your_actual_clerk_webhook_secret
    ```
+
+   ⚠️ **Security Note**: Never commit your actual `.env.local` file to version control. The `.gitignore` file already excludes it.
 
 4. Set up the database:
 
