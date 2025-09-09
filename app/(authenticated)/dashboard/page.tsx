@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useCallback, useEffect, useState } from "react";
 import { TodoItem } from "@/components/TodoItem";
 import { TodoForm } from "@/components/TodoForm";
-import { Todo } from "@prisma/client";
+import { Todo } from "@/types";
 import { useUser } from "@clerk/nextjs";
 import { AlertTriangle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -39,10 +39,7 @@ export default function Dashboard() {
         setTotalPages(data.totalPages);
         setCurrentPage(data.currentPage);
         setIsLoading(false);
-        toast({
-          title: "Success",
-          description: "Todos fetched successfully.",
-        });
+        // Removed unnecessary success toast for fetching
       } catch (error) {
         setIsLoading(false);
         toast({

@@ -57,7 +57,18 @@ export async function POST(req: Request) {
       );
 
       if (!primaryEmail) {
+        console.error("No primary email found for user:", id);
         return new Response("No primary email found", { status: 400 });
+      }
+
+      // Check if user already exists to prevent duplicate creation
+      const existingUser = await prisma.user.findUnique({
+        where: { id: id! },
+      });
+
+      if (existingUser) {
+        console.log("User already exists:", id);
+        return new Response("User already exists", { status: 200 });
       }
 
       const newUser = await prisma.user.create({

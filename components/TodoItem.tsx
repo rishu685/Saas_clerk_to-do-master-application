@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Todo } from "@prisma/client";
+import { Todo } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Trash2, CheckCircle, XCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";

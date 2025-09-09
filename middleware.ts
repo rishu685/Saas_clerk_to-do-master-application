@@ -27,7 +27,7 @@ export default authMiddleware({
         }
 
         // Redirect logged in users to appropriate dashboard if they try to access a public route
-        if (publicRoutes.includes(req.nextUrl.pathname)) {
+        if (publicRoutes.includes(req.nextUrl.pathname) && req.nextUrl.pathname !== "/") {
           return NextResponse.redirect(
             new URL(
               role === "admin" ? "/admin/dashboard" : "/dashboard",
