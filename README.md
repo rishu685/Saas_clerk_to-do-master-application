@@ -1,5 +1,10 @@
 # SaaS Clerk Todo Application
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Next.js](https://img.shields.io/badge/Next.js-14.x-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC)](https://tailwindcss.com/)
+
 A powerful task management application built with Next.js, featuring role-based authentication using Clerk and a PostgreSQL database.
 
 ## Getting Started

@@ -200,8 +200,19 @@ export default async function Home() {
               </Button>
             </div>
           </div>
-          <div className="mt-8 text-center text-slate-500 text-sm">
-            © 2025 TaskFlow Pro. All rights reserved.
+          <div className="mt-8 text-center text-slate-500 text-sm space-y-2">
+            <div>© 2025 TaskFlow Pro. All rights reserved.</div>
+            <div>
+              Licensed under{" "}
+              <Link 
+                href="https://opensource.org/licenses/Apache-2.0" 
+                className="underline hover:text-slate-700 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Apache License 2.0
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
