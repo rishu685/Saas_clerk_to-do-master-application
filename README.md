@@ -102,10 +102,49 @@ To test the admin functionality, you need to manually set the user's role to "ad
 
 Now, when this user logs in, they will have admin privileges in the application.
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions! Please feel free to submit a Pull Request. Here's how to contribute:
 
-## License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This project is licensed under the MIT License.
+## 📝 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+### License Summary
+
+- ✅ **Commercial use** - You can use this project for commercial purposes
+- ✅ **Modification** - You can modify the source code
+- ✅ **Distribution** - You can distribute the original or modified code
+- ✅ **Patent use** - Express grant of patent rights from contributors
+- ✅ **Private use** - You can use this project privately
+
+**Requirements:**
+- 📄 Include the license and copyright notice
+- 📝 State changes made to the code
+- 🔗 Include the original license in distributions
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org/) - The React framework used
+- [Clerk](https://clerk.dev/) - Authentication and user management
+- [Prisma](https://prisma.io/) - Database ORM
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+- [Lucide React](https://lucide.dev/) - Icon library
+
+## 📞 Support
+
+If you have any questions or need help with the project, please:
+
+1. Check the [Issues](https://github.com/rishu685/Saas_clerk_to-do-master-application/issues) for existing solutions
+2. Create a new [Issue](https://github.com/rishu685/Saas_clerk_to-do-master-application/issues/new) if you need help
+3. Star ⭐ the repository if you find it useful!
+
+---
+
+**Made with ❤️ by [Rishu](https://github.com/rishu685)**
