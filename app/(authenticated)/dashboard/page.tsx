@@ -1,6 +1,6 @@
 "use client";
 
-import { useToast } from "@/hooks/use-toast";
+import { useEnhancedToast } from "@/hooks/use-enhanced-toast";
 import { useCallback, useEffect, useState } from "react";
 import { TodoItem } from "@/components/TodoItem";
 import { TodoForm } from "@/components/TodoForm";
@@ -16,7 +16,7 @@ import { useDebounceValue } from "usehooks-ts";
 
 export default function Dashboard() {
   const { user } = useUser();
-  const { toast } = useToast();
+  const { error, promise } = useEnhancedToast();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,16 +40,12 @@ export default function Dashboard() {
         setCurrentPage(data.currentPage);
         setIsLoading(false);
         // Removed unnecessary success toast for fetching
-      } catch (error) {
+      } catch (fetchError) {
         setIsLoading(false);
-        toast({
-          title: "Error",
-          description: "Failed to fetch todos. Please try again.",
-          variant: "destructive",
-        });
+        error("Failed to fetch todos", "Please try again.");
       }
     },
-    [toast, debouncedSearchTerm]
+    [error, debouncedSearchTerm]
   );
 
   useEffect(() => {
@@ -66,84 +62,75 @@ export default function Dashboard() {
   };
 
   const handleAddTodo = async (title: string) => {
-    toast({
-      title: "Adding Todo",
-      description: "Please wait...",
-    });
     try {
-      const response = await fetch("/api/todos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title }),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to add todo");
-      }
+      await promise(
+        fetch("/api/todos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title }),
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to add todo");
+          }
+          return response.json();
+        }),
+        {
+          loading: "Adding todo...",
+          success: "Todo added successfully!",
+          error: "Failed to add todo. Please try again.",
+        }
+      );
       await fetchTodos(currentPage);
-      toast({
-        title: "Success",
-        description: "Todo added successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to add todo. Please try again.",
-        variant: "destructive",
-      });
+    } catch (addError) {
+      // Error is already handled by the promise wrapper
     }
   };
 
   const handleUpdateTodo = async (id: string, completed: boolean) => {
-    toast({
-      title: "Updating Todo",
-      description: "Please wait...",
-    });
     try {
-      const response = await fetch(`/api/todos/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ completed }),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to update todo");
-      }
+      await promise(
+        fetch(`/api/todos/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ completed }),
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to update todo");
+          }
+          return response.json();
+        }),
+        {
+          loading: "Updating todo...",
+          success: "Todo updated successfully!",
+          error: "Failed to update todo. Please try again.",
+        }
+      );
       await fetchTodos(currentPage);
-      toast({
-        title: "Success",
-        description: "Todo updated successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update todo. Please try again.",
-        variant: "destructive",
-      });
+    } catch (updateError) {
+      // Error is already handled by the promise wrapper
     }
   };
 
   const handleDeleteTodo = async (id: string) => {
-    toast({
-      title: "Deleting Todo",
-      description: "Please wait...",
-    });
     try {
-      const response = await fetch(`/api/todos/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to delete todo");
-      }
+      await promise(
+        fetch(`/api/todos/${id}`, {
+          method: "DELETE",
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to delete todo");
+          }
+          return response.json();
+        }),
+        {
+          loading: "Deleting todo...",
+          success: "Todo deleted successfully!",
+          error: "Failed to delete todo. Please try again.",
+        }
+      );
       await fetchTodos(currentPage);
-      toast({
-        title: "Success",
-        description: "Todo deleted successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to delete todo. Please try again.",
-        variant: "destructive",
-      });
+    } catch (deleteError) {
+      // Error is already handled by the promise wrapper
     }
   };
 

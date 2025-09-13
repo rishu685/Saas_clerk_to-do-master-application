@@ -8,7 +8,14 @@ export async function GET(req: NextRequest) {
   const { userId } = auth();
 
   if (!userId) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { 
+        error: "Unauthorized", 
+        message: "Please sign in to access your todos",
+        code: "AUTH_REQUIRED"
+      }, 
+      { status: 401 }
+    );
   }
 
   const { searchParams } = new URL(req.url);
@@ -47,8 +54,13 @@ export async function GET(req: NextRequest) {
       totalPages,
     });
   } catch (error) {
+    console.error("Error fetching todos:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { 
+        error: "Internal Server Error", 
+        message: "Failed to fetch your todos. Please try again.",
+        code: "FETCH_FAILED"
+      },
       { status: 500 }
     );
   }
@@ -58,7 +70,14 @@ export async function POST(req: NextRequest) {
   const { userId } = auth();
 
   if (!userId) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { 
+        error: "Unauthorized", 
+        message: "Please sign in to create todos",
+        code: "AUTH_REQUIRED"
+      }, 
+      { status: 401 }
+    );
   }
 
   try {
@@ -68,14 +87,23 @@ export async function POST(req: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { 
+          error: "User not found", 
+          message: "Your account could not be found",
+          code: "USER_NOT_FOUND"
+        }, 
+        { status: 404 }
+      );
     }
 
     if (!user.isSubscribed && user.todos.length >= 3) {
       return NextResponse.json(
         {
-          error:
-            "Free users can only create up to 3 todos. Please subscribe for more.",
+          error: "Subscription required",
+          message: "Free users can only create up to 3 todos. Please subscribe for more.",
+          code: "SUBSCRIPTION_REQUIRED",
+          upgradeUrl: "/subscribe"
         },
         { status: 403 }
       );
@@ -85,7 +113,22 @@ export async function POST(req: NextRequest) {
 
     if (!title || title.trim().length === 0) {
       return NextResponse.json(
-        { error: "Title is required" },
+        { 
+          error: "Invalid input", 
+          message: "Todo title is required",
+          code: "TITLE_REQUIRED"
+        },
+        { status: 400 }
+      );
+    }
+
+    if (title.trim().length > 255) {
+      return NextResponse.json(
+        { 
+          error: "Invalid input", 
+          message: "Todo title must be less than 255 characters",
+          code: "TITLE_TOO_LONG"
+        },
         { status: 400 }
       );
     }
@@ -98,7 +141,11 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error creating todo:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { 
+        error: "Internal Server Error", 
+        message: "Failed to create todo. Please try again.",
+        code: "CREATE_FAILED"
+      },
       { status: 500 }
     );
   }

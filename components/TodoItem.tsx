@@ -55,8 +55,8 @@ export function TodoItem({
   return (
     <Card className={`group transition-all duration-300 hover:shadow-lg hover-lift ${
       isCompleted 
-        ? 'bg-gradient-to-r from-green-50/80 to-emerald-50/80 border-green-200/50' 
-        : 'bg-white/80 backdrop-blur-sm border-white/20'
+        ? 'bg-gradient-to-r from-green-50/80 to-emerald-50/80 border-green-200/50 dark:from-green-900/20 dark:to-emerald-900/20 dark:border-green-700/50' 
+        : 'bg-card/80 backdrop-blur-sm border-border/20'
     } shadow-md`}>
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
@@ -68,8 +68,8 @@ export function TodoItem({
               disabled={isToggling}
               className={`h-8 w-8 rounded-full transition-all duration-200 ${
                 isCompleted
-                  ? 'bg-green-100 text-green-600 hover:bg-green-200'
-                  : 'bg-slate-100 text-slate-400 hover:bg-blue-100 hover:text-blue-600'
+                  ? 'bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/50 dark:text-green-400 dark:hover:bg-green-800/50'
+                  : 'bg-accent text-muted-foreground hover:bg-primary/10 hover:text-primary'
               }`}
             >
               {isToggling ? (
@@ -84,12 +84,12 @@ export function TodoItem({
             <div className="flex-1 min-w-0">
               <p className={`text-sm font-medium transition-all duration-200 ${
                 isCompleted 
-                  ? 'text-green-700 line-through' 
-                  : 'text-slate-900'
+                  ? 'text-green-700 line-through dark:text-green-400' 
+                  : 'text-foreground'
               }`}>
                 {todo.title}
               </p>
-              <div className="flex items-center mt-1 text-xs text-slate-500">
+              <div className="flex items-center mt-1 text-xs text-muted-foreground">
                 <Clock className="w-3 h-3 mr-1" />
                 <span>Created {formatDate(todo.createdAt)}</span>
                 {isAdmin && (
@@ -107,7 +107,7 @@ export function TodoItem({
             size="sm"
             onClick={handleDelete}
             disabled={isDeleting}
-            className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-red-100 hover:text-red-600"
+            className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-destructive/10 hover:text-destructive"
           >
             {isDeleting ? (
               <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full" />

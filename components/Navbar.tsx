@@ -12,13 +12,14 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const { user } = useUser();
   const { signOut } = useClerk();
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/20 bg-white/80 backdrop-blur-md shadow-sm">
+    <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center space-x-3">
@@ -31,14 +32,15 @@ export default function Navbar() {
           </div>
           
           <div className="flex items-center space-x-4">
+            <ThemeToggle />
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="relative h-10 w-10 rounded-full hover:ring-2 hover:ring-blue-500/20 transition-all duration-200"
+                    className="relative h-10 w-10 rounded-full hover:ring-2 hover:ring-ring/20 transition-all duration-200"
                   >
-                    <Avatar className="h-10 w-10 border-2 border-white shadow-md">
+                    <Avatar className="h-10 w-10 border-2 border-border shadow-md">
                       <AvatarImage src={user.imageUrl} alt="User avatar" />
                       <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
                         {user.firstName?.charAt(0) || user.emailAddresses[0]?.emailAddress.charAt(0).toUpperCase() || "U"}
@@ -48,25 +50,25 @@ export default function Navbar() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
                   align="end" 
-                  className="w-56 bg-white/95 backdrop-blur-md border border-white/20 shadow-xl"
+                  className="w-56 bg-background/95 backdrop-blur-md border border-border/50 shadow-xl"
                 >
-                  <div className="px-3 py-2 border-b border-slate-200/50">
-                    <p className="text-sm font-medium text-slate-900">
+                  <div className="px-3 py-2 border-b border-border/50">
+                    <p className="text-sm font-medium text-foreground">
                       {user.firstName} {user.lastName}
                     </p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-muted-foreground">
                       {user.emailAddresses[0]?.emailAddress}
                     </p>
                   </div>
                   
-                  <DropdownMenuItem asChild className="cursor-pointer hover:bg-blue-50">
+                  <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent">
                     <Link href="/dashboard" className="flex items-center">
                       <User className="mr-2 h-4 w-4 text-blue-600" />
                       <span>Dashboard</span>
                     </Link>
                   </DropdownMenuItem>
                   
-                  <DropdownMenuItem asChild className="cursor-pointer hover:bg-purple-50">
+                  <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent">
                     <Link href="/subscribe" className="flex items-center">
                       <CreditCard className="mr-2 h-4 w-4 text-purple-600" />
                       <span>Upgrade Plan</span>
@@ -77,7 +79,7 @@ export default function Navbar() {
                   
                   <DropdownMenuItem 
                     onClick={() => signOut()}
-                    className="cursor-pointer hover:bg-red-50 text-red-600"
+                    className="cursor-pointer hover:bg-destructive/10 text-destructive focus:text-destructive"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Sign Out</span>
