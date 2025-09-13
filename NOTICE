@@ -1,0 +1,16 @@
+SaaS Clerk Todo Application
+Copyright 2025 Rishu
+
+This product includes software developed by Rishu (https://github.com/rishu685).
+
+This project uses the following open source libraries:
+
+- Next.js (MIT License)
+- React (MIT License)
+- TypeScript (Apache License 2.0)
+- Tailwind CSS (MIT License)
+- Clerk (Commercial License)
+- Prisma (Apache License 2.0)
+- Lucide React (ISC License)
+
+For more details about these dependencies, see the package.json file.

@@ -2,6 +2,23 @@
   "name": "saas-clerk-todo-app",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
+  "author": "Rishu",
+  "description": "A premium task management application built with Next.js, featuring role-based authentication using Clerk and PostgreSQL database.",
+  "keywords": [
+    "nextjs",
+    "typescript",
+    "clerk",
+    "postgresql",
+    "task-management",
+    "todo-app",
+    "saas",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rishu685/Saas_clerk_to-do-master-application.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
