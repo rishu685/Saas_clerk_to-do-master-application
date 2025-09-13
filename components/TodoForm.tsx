@@ -28,11 +28,11 @@ export function TodoForm({ onSubmit }: TodoFormProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="What needs to be done today?"
-          className="h-12 pl-4 pr-12 bg-white/80 backdrop-blur-sm border-white/20 shadow-lg focus:shadow-xl focus:border-blue-500/50 transition-all duration-200 placeholder:text-slate-400"
+          className="h-12 pl-4 pr-12 bg-background/80 backdrop-blur-sm border-border/20 shadow-lg focus:shadow-xl focus:border-primary/50 transition-all duration-200 placeholder:text-muted-foreground"
           required
         />
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-          <Sparkles className="w-5 h-5 text-slate-400" />
+          <Sparkles className="w-5 h-5 text-muted-foreground" />
         </div>
       </div>
       <Button 
